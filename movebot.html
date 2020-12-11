@@ -7,31 +7,9 @@
    <body>
 	  <body>
 		 <div id="container">
-			<div id="buttons">
-			   <button class="button button4 up" onclick="move()">
-				  <svg width="37" height="58" xmlns="http://www.w3.org/2000/svg">
-					 <g>
-						<path id="svg_2" d="m0.75,29.18159l17.5,-28.43159l17.5,28.43159l-8.75,0l0,28.5684l-17.5,0l0,-28.5684l-8.75,0z" stroke-width="1.5" fill="#ffffff" stroke="#156507"/>
-					 </g>
-				  </svg>
-			   </button>
-			   <button class="button button4 right" onclick="turnR()">
-				  <svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
-					 <g>
-						<path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#cab83c"/>
-					 </g>
-				  </svg>
-			   </button>
-			   <button class="button button4 left" onclick="turnL()">
-				  <svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
-					 <g transform="translate(45,0) scale(-1,1)">
-						<path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#5f1d09"/>
-					 </g>
-				  </svg>
-			   </button>
-			</div>
-			<div style="width:1001px;height:1001px">
-			   <svg id="maze" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+			<div style="height:1010px">
+			   <svg id="maze" width="50%" height="50%" xmlns="http://www.w3.org/2000/svg">
+				<!--ROBOT-->
 				  <svg xmlns="http://www.w3.org/2000/svg">
 					 <g id="robot"transform="translate(1,1) rotate(0,60,60)">
 						<rect stroke="#000" fill="#bf0000" stroke-width="1.5" x="26.00877" y="13.42374" width="48.37722" height="40.49999" id="svg_1"/>
@@ -69,6 +47,29 @@
 				  </defs>
 				  <rect width="100%" height="100%" fill="url(#grid)"></rect>
 			   </svg>
+			<div id="buttons">
+			   <button class="button button4 up" onclick="move()">
+				  <svg width="37" height="58" xmlns="http://www.w3.org/2000/svg">
+					 <g>
+						<path id="svg_2" d="m0.75,29.18159l17.5,-28.43159l17.5,28.43159l-8.75,0l0,28.5684l-17.5,0l0,-28.5684l-8.75,0z" stroke-width="1.5" fill="#ffffff" stroke="#156507"/>
+					 </g>
+				  </svg>
+			   </button>
+			   <button class="button button4 right" onclick="turnR()">
+				  <svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
+					 <g>
+						<path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#cab83c"/>
+					 </g>
+				  </svg>
+			   </button>
+			   <button class="button button4 left" onclick="turnL()">
+				  <svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
+					 <g transform="translate(45,0) scale(-1,1)">
+						<path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#5f1d09"/>
+					 </g>
+				  </svg>
+			   </button>
+			 </div>
 			</div>
 		 </div>
    </body>

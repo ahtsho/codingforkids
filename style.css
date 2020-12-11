@@ -3,23 +3,21 @@
 	margin: auto;
 }
 #buttons{
-	position: fixed;
-	top: 0;
 }
 #maze{
-	margin-top: 100px;
+	float: left;
 }
 .button {
 	/*background-color: #fffdc4f7;*/
 	border: 2px solid #cab83c;
 	color: white;
-	padding: 15px 140px;
+	padding: 15px 25px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	margin: 4px 2px;
 	cursor: pointer;
-	border-radius: 35px;
+	border-radius: 20px;
 }
 .button1 {font-size: 10px;}
 .button2 {font-size: 12px;}
