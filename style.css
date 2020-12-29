@@ -1,11 +1,31 @@
- #container{
-	width: 1010px;
-	margin: auto;
-}
+ body{
+ 	width:1001px;
+ 	/*border: 1px solid black;*/
+ 	height: 800px;
+ 	background-color:darkslategrey
+ }
+
 #buttons{
 }
+
 #maze{
 	float: left;
+	width:50%;
+	margin: 0 50;
+	background-color:;
+}
+.coding{
+	background-color: azure;
+}
+.scegli{
+	background-color: black;
+}
+.conta{
+	background-color: darkgreen;
+}
+line{
+	stroke:black;
+	stroke-width:0.3;
 }
 .button {
 	/*background-color: #fffdc4f7;*/
@@ -22,8 +42,123 @@
 .button1 {font-size: 10px;}
 .button2 {font-size: 12px;}
 .button3 {font-size: 16px;}
-.button4 {font-size: 20px;}
+.button4 {
+	font-size: 20px;
+	float: right;
+	width: 395px;
+}
 .button5 {font-size: 24px;}
 .up {background-color: #2fad19}
 .right {background-color: #ffff00}
 .left {background-color: #f14411}
+
+/* Style the links inside the navigation bar */
+.topnav {
+	margin-bottom: 50px
+}
+.topnav a {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #8a9ac0;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #225fe9;
+  color: white;
+}
+input[type="text"]{ 
+	padding: 20px 10px; line-height: 28px; 
+	font-size: 27px;
+}
+
+.t-neutral .select-box-svg__inner {
+	 background-color: #eee;
+}
+.t-neutral .select-box-svg__inner select option {
+	color: #111;
+}
+.t-neutral .select-box-svg__inner select {
+	color: #697070;
+}
+.t-neutral .select-box-svg__inner select:active,
+.t-neutral .select-box-svg__inner select:focus {
+}
+.t-neutral .icon--arrow .icon__box {
+   fill:  #222;
+}
+.t-neutral .icon--arrow .icon__caret {
+	fill: #fff;
+}
+.number{
+	float: left;
+}
+.select-box-svg{
+	width: 100px;
+	/*float: left;*/
+}
+.slide {
+  /*animation: 2s 1 forwards;*/
+  transition-duration: 1s;
+}
+
+.counter-block {
+	width: 100px;
+	display: inline;
+}
+.ouch {
+  background-image: url(move.svg);
+}
+.bounce-v {
+	animation-name: bounce-v;
+	animation-duration: .3s;
+	animation-iteration-count: 2;
+	animation-timing-function: linear;
+}
+@keyframes bounce-v {
+	0%   { transform: translateY(0); }
+	50%  { transform: translateY(-30px); }
+	100% { transform: translateY(0); }
+}
+.bounce-h {
+	animation-name: bounce-h;
+	animation-duration: .3s;
+	animation-iteration-count: 2;
+	animation-timing-function: linear;
+}
+@keyframes bounce-h{
+	0%   { transform: translateX(0); }
+	50%  { transform: translateX(-30px); }
+	100% { transform: translateX(0); }
+}
+.shake {
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
