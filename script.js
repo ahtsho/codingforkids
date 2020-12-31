@@ -1,4 +1,5 @@
  var actionStack = [];
+ var asteroidPositions = [[0,0]]
  function updateTranslate(x,y){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
@@ -10,6 +11,7 @@
 	} else {
 		addHBounce()
 	}
+	removeAllBouncesFromBoard()
  }
  function addVBounce(){
  	removeAllBouncesFromBoard()
@@ -106,7 +108,9 @@
  }
  function charging(){
  	if(getCurrentXYval()[0]==401 && getCurrentXYval()[1]==1){
- 		console.log("HURRA'!!! Batteria in carica!")
+ 		document.getElementById("robot").classList.add("zooom")
+ 	} else {
+ 		document.getElementById("robot").classList.remove("zooom")
  	}
  }
  function getRequestedDirection(cmd){
@@ -151,4 +155,55 @@ function getRandomInt(max) {
  	if(document.getElementById("pila-conta")){ 
  		document.getElementById("pila-conta").setAttribute('transform','translate('+randX+','+randY+')')
  	}
+ }
+ function getUniqueTransformedPoints(max,bx,by){
+ 	pt = genNonOverlappingPt(max)
+ 	ptT = []
+ 	ptT[0] = pt[0]*100+bx
+ 	ptT[1] = pt[1]*100+by
+ 	return ptT
+ }
+  
+ function genNonOverlappingPt(max){
+ 	pt = []
+ 	pt[0] = getRandomInt(max)
+ 	pt[1] = getRandomInt(max)
+ 	inserted = insertIntoTakenPositions(pt)
+ 	while(!inserted){
+ 		pt[0] = getRandomInt(max)
+ 		pt[1] = getRandomInt(max)
+ 		inserted = insertIntoTakenPositions(pt)
+ 	}
+ 	return pt
+ }
+ /*
+ function genNonOverlappingPts(max,bx,by){
+ 	pt = genRandomPt(max,bx,by)
+ 	inserted = insertIntoTakenPositions(pt)
+ 	while(!inserted){
+ 		pt = genRandomPt(max,bx,by)
+ 		inserted = insertIntoTakenPositions(pt)
+ 	}
+ 	return pt
+ }*/
+ function insertIntoTakenPositions(pt){
+ 	for (var i = 0; i < asteroidPositions.length; i++) {
+ 		if(asteroidPositions[i][0]==pt[0] && asteroidPositions[i][1]==pt[1]){
+ 			return false;
+ 		}
+ 	}
+ 	asteroidPositions.push(pt)
+ 	return true;
+ }
+ function placeAsteroidsAndBatteryRand(){
+ 	for (var i = 1; i <=4; i++) {
+ 		pt = getUniqueTransformedPoints(5,58,140)
+ 		placeObjectById("aster"+i,pt[0],pt[1]);
+ 	}
+ 	pt = getUniqueTransformedPoints(5,93,150)
+ 	placeObjectById("pila",pt[0],pt[1])
+ }
+ function placeObjectById(id,x,y){
+ 	document.getElementById(id).style.left=x+"px"
+	document.getElementById(id).style.top=y+"px"
  }
