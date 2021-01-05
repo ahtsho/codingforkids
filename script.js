@@ -229,33 +229,34 @@
  		executeActionFromIcon(x,actIter[x])
  	}
  }
-function getRandomInt(max) {
-	return Math.floor(Math.random() * Math.floor(max));
+function getRandomInt(min,max) {
+	//return Math.floor(Math.random() * Math.floor(max));
+	return Math.floor(Math.random() * (max - min) + min);
 }
  function randPlaceBattery(){
- 	randX = getRandomInt(5)*100+35
- 	randY = getRandomInt(5)*100+10
+ 	randX = getRandomInt(0,5)*100+35
+ 	randY = getRandomInt(0,5)*100+10
  	if(document.getElementById("pila-conta")){ 
  		document.getElementById("pila-conta").setAttribute('transform','translate('+randX+','+randY+')')
  	}
  }
- function getUniqueTransformedPoints(max,bx,by,id){
- 	pt = genNonOverlappingPt(max,id)
+ function getUniqueTransformedPoints(min,max,bx,by,id){
+ 	pt = genNonOverlappingPt(min,max,id)
  	ptT = []
  	ptT[0] = pt[0]*100+bx
  	ptT[1] = pt[1]*100+by
  	return ptT
  }
   
- function genNonOverlappingPt(max,id){
+ function genNonOverlappingPt(min,max,id){
  	pt = []
- 	pt[0] = getRandomInt(max)
- 	pt[1] = getRandomInt(max)
+ 	pt[0] = getRandomInt(min,max)
+ 	pt[1] = getRandomInt(min,max)
  	pt[2] = id
  	inserted = insertIntoTakenPositions(pt)
  	while(!inserted){
- 		pt[0] = getRandomInt(max)
- 		pt[1] = getRandomInt(max)
+ 		pt[0] = getRandomInt(min,max)
+ 		pt[1] = getRandomInt(min,max)
  		inserted = insertIntoTakenPositions(pt)
  	}
  	return pt
@@ -285,10 +286,10 @@ function isEmptyCell(pt, allow){
  }
  function placeAsteroidsAndBatteryRand(){
  	for (var i = 1; i <=4; i++) {
- 		pt = getUniqueTransformedPoints(5,58,140,"aster"+i)
+ 		pt = getUniqueTransformedPoints(0,5,58,140,"aster"+i)
  		placeObjectById("aster"+i,pt[0],pt[1]);
  	}
- 	pt = getUniqueTransformedPoints(5,93,150,"pila")
+ 	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
  	placeObjectById("pila",pt[0],pt[1])
  }
  function placeObjectById(id,x,y){
