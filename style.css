@@ -2,7 +2,7 @@
  	width:1001px;
  	/*border: 1px solid black;*/
  	height: 800px;
- 	background-color:darkslategrey
+ 	background-color:azure
  }
 
 #buttons{
@@ -12,7 +12,6 @@
 	float: left;
 	width:50%;
 	margin: 0 50;
-	background-color:;
 }
 .coding{
 	background-color: azure;
@@ -122,6 +121,7 @@ input[type="text"]{
 	animation-duration: .3s;
 	animation-iteration-count: 2;
 	animation-timing-function: linear;
+	z-index: -1;
 }
 @keyframes bounce-v {
 	0%   { transform: translateY(0); }
@@ -133,6 +133,7 @@ input[type="text"]{
 	animation-duration: .3s;
 	animation-iteration-count: 2;
 	animation-timing-function: linear;
+	z-index: -1;
 }
 @keyframes bounce-h{
 	0%   { transform: translateX(0); }
@@ -180,10 +181,11 @@ input[type="text"]{
 }
 .robot-back{
 	background-image: url('imgs/robot.svg');
-	width: 100px;
-	height: 100px;
+	width: 96px;
+	height: 62px;
 	display: inline-grid;
 	position: absolute;
+	z-index: 50;
 }
 .asteroid{
 	background-image: url('imgs/asteroid.svg');
@@ -192,6 +194,7 @@ input[type="text"]{
 	left:57px;
 	width: 100px;
 	height: 100px;
+	z-index: 100;
 }
 .pila{
 	background-image: url('imgs/pila.svg');
@@ -200,4 +203,5 @@ input[type="text"]{
 	left:57px;
 	width: 100px;
 	height: 100px;
+	z-index: 20;
 }
