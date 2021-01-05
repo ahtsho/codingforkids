@@ -26,6 +26,20 @@
  	}
  	return p
  }
+ function hasWon(pt){
+ 	for (var i = 0; i < asteroidPositions.length; i++) {
+ 		if(asteroidPositions[i][0]==pt[0] && asteroidPositions[i][1]==pt[1] ){
+ 			if(asteroidPositions[i][2].search("pila")==0){
+ 				return true;
+ 			}
+ 		}
+ 	}
+ 	return false;
+ }
+ function celebrate(){
+ 	document.getElementById("celebrate").classList.add("pyro")
+ 	document.getElementById("button5").style.visibility='visible'
+ }
  function updateTranslate2(x,y){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
@@ -33,6 +47,13 @@
 			//"translate(152px, 117px) rotate(50deg)"
 			if(isEmptyCell(extractDirection(next),true)){
 				setTransformation('translate('+next[0]+'px,'+next[1]+'px) '+getCurrentRotate())
+				xyr = getCurrentXYval()
+				p[0] = xyr[0]
+				p[1] = xyr[1]
+				extrP = extractDirection(p)
+				if(hasWon(extrP)){
+					celebrate()
+				}
 			} else {
 				shake(extractDirection(next))
 			}
@@ -111,7 +132,7 @@
 	return Number(getCurrentRotate().replace(/\(|\)|rotate|deg/g, ""))
  }
  function move(){
-	currOrientation = getCurrentDval()
+	//currOrientation = getCurrentDval()
 	step = getNextStep()
 	updateTranslate2(step[0],step[1])
  }
@@ -244,7 +265,9 @@ function isEmptyCell(pt, allow){
  		if(asteroidPositions[i][0]==pt[0] && asteroidPositions[i][1]==pt[1] ){
  			//the obstacles are for now only asteroids
  			//&& asteroidPositions[i][2].search("aster")==0){
- 			if(asteroidPositions[i][2].search("pila")==0 && allow){
+ 			if((asteroidPositions[i][2].search("pila")==0 || 
+ 				asteroidPositions[i][2].search("robot")==0) 
+ 				&& allow){
  				return true;
  			} else {
  				return false;
