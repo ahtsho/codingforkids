@@ -1,5 +1,5 @@
  var actionStack = [];
- var asteroidPositions = [[0,0,"robot"]]
+ var asteroidPositions = []
  
  function updateTranslate(x,y){
 	next = getNextPos(x,y)
@@ -37,6 +37,7 @@
  	return false;
  }
  function celebrate(){
+ 	document.body.classList.add("night")
  	document.getElementById("celebrate").classList.add("pyro")
  	document.getElementById("button5").style.visibility='visible'
  }
@@ -254,10 +255,15 @@ function getRandomInt(min,max) {
  	pt[1] = getRandomInt(min,max)
  	pt[2] = id
  	inserted = insertIntoTakenPositions(pt)
- 	while(!inserted){
+ 	counter = 0;
+ 	while(!inserted && counter < 10){
+ 		counter = counter+1
  		pt[0] = getRandomInt(min,max)
  		pt[1] = getRandomInt(min,max)
  		inserted = insertIntoTakenPositions(pt)
+ 	}
+ 	if(counter >=10){
+ 		console.log("counter=="+counter);
  	}
  	return pt
  }
@@ -284,13 +290,47 @@ function isEmptyCell(pt, allow){
  	}
  	return isEmpty;
  }
- function placeAsteroidsAndBatteryRand(){
+ function placeRobotRand(){
+ 	xy = [[0,0,0,-90],[0,4,180,270],[4,0,0,90],[4,4,180,90]]
+ 	i = getRandomInt(0,4)
+ 	pick = xy[i]
+ 	//val is like "translate(152px, 117px) rotate(50deg)"
+ 	updateTranslate2(pick[0],pick[1])
+ 	r = getRandomInt(2,4)
+ 	updateRotate2(pick[r])
+ 	asteroidPositions[0]=[pick[0],pick[1],"robot"]
+ }
+ function distributeObjsRand(){
+ 	placeRobotRand()
  	for (var i = 1; i <=4; i++) {
  		pt = getUniqueTransformedPoints(0,5,58,140,"aster"+i)
  		placeObjectById("aster"+i,pt[0],pt[1]);
  	}
- 	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
+ 	//get battery as far as possible from robot
+ 	mpt = calculateMaxDistance()
+ 	pt = getUniqueTransformedPoints(mpt[0],mpt[1],93,150,"pila")
  	placeObjectById("pila",pt[0],pt[1])
+ }
+ function calculateMaxDistance(){
+ 	robP = asteroidPositions[0]
+ 	batPMinMax =[]
+ 	//battery has to stay at least 2 cells away from robot
+ 	//batPMinMax [xmin,ymin,xmax,ymax]
+ 	if(robP[0]==0){
+ 		batPMinMax[0] =	2
+ 		batPMinMax[2] =	5
+ 	} else {
+ 		batPMinMax[0] =	0
+ 		batPMinMax[2] =	2
+ 	}
+ 	if(robP[1]==0){
+ 		batPMinMax[1] =	2
+ 		batPMinMax[3] =	5
+ 	} else {
+ 		batPMinMax[1] =	0
+ 		batPMinMax[3] =	2
+ 	}
+ 	return batPMinMax;
  }
  function placeObjectById(id,x,y){
 	document.getElementById(id).style.left=x+"px"

@@ -211,7 +211,7 @@ input[type="text"]{
 	z-index: 20;
 }
 /*fireworks*/
-body {
+.night {
   background: #000;
 }
 
