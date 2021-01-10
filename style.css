@@ -1,16 +1,42 @@
  body{
- 	width:1001px;
- 	/*border: 1px solid black;*/
- 	height: 800px;
- 	background-color:azure
+ 	width: 98%;
+    border: 1px solid black;
+    height: 700px;
+    background-color: azure;
  }
 
-#buttons{
+h1{
+	background-color: #384ee55c;
+	margin-bottom: 70px;
 }
 
+.main-title {
+  font-size: 50px;
+  margin-left: 47px;
+  transform:scale(2,1);
+
+}
+.main-title span:nth-child(1) {
+  color:#a71313;
+}
+.main-title span:nth-child(2) {
+  color: darkblue;
+}
+.main-title span:nth-child(3) {
+  color: #2fad19;
+}
+.main-title span:nth-child(4) {
+  color: #ffff00;
+}
+.main-title span:nth-child(5) {
+  color: #f14411;
+}
+.main-title span:nth-child(6) {
+  color: black;
+}
 #maze{
 	float: left;
-	width:50%;
+	width: 37.3%;
 	margin: 0 50;
 }
 .coding{
@@ -23,8 +49,17 @@
 	background-color: azure;
 }
 line{
-	stroke:black;
-	stroke-width:0.3;
+	stroke:#6a1919;
+	stroke-width:1;
+	stroke-linecap: round;
+	stroke-dasharray: 3 15;
+}
+.border-line {
+	stroke-width:15;
+	stroke:#a71313;
+}
+#buttons{
+	padding-right: 140px;
 }
 .button {
 	/*background-color: #fffdc4f7;*/
@@ -52,20 +87,25 @@ line{
 	width: 395px;
 	visibility: hidden;
 }
+#counters{
+	visibility: hidden;
+}
 .up {background-color: #2fad19}
 .right {background-color: #ffff00}
 .left {background-color: #f14411}
 
 /* Style the links inside the navigation bar */
 .topnav {
-	margin-bottom: 50px
+	float: right;
 }
 .topnav a {
-  color: #f2f2f2;
+  color: #6f7a9f;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 27px 21px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 20px;
+  margin-right: 5px;
+  text-transform: uppercase;
 }
 
 /* Change the color of links on hover */
@@ -76,7 +116,7 @@ line{
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #225fe9;
+  background-color: green;
   color: white;
 }
 input[type="text"]{ 

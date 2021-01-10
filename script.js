@@ -55,6 +55,7 @@
 				if(hasWon(extrP)){
 					celebrate()
 				}
+				return true
 			} else {
 				shake(extractDirection(next))
 			}
@@ -64,6 +65,7 @@
 	} else {
 		addHBounce()
 	}
+	return false
  }
  function addVBounce(){
  	removeAllBouncesFromBoard()
@@ -295,21 +297,23 @@ function isEmptyCell(pt, allow){
  	i = getRandomInt(0,4)
  	pick = xy[i]
  	//val is like "translate(152px, 117px) rotate(50deg)"
- 	updateTranslate2(pick[0],pick[1])
- 	r = getRandomInt(2,4)
- 	updateRotate2(pick[r])
- 	asteroidPositions[0]=[pick[0],pick[1],"robot"]
+ 	tran = updateTranslate2(pick[0],pick[1])
+ 	if(tran){
+	 	r = getRandomInt(2,4)
+	 	updateRotate2(pick[r])
+	 	asteroidPositions[0]=[pick[0],pick[1],"robot"]
+	 }
  }
  function distributeObjsRand(){
  	placeRobotRand()
  	for (var i = 1; i <=4; i++) {
  		pt = getUniqueTransformedPoints(0,5,58,140,"aster"+i)
- 		placeObjectById("aster"+i,pt[0],pt[1]);
+ 		placeObjectById("aster"+i,pt[0],pt[1],"asteroid");
  	}
  	//get battery as far as possible from robot
  	mpt = calculateMaxDistance()
  	pt = getUniqueTransformedPoints(mpt[0],mpt[1],93,150,"pila")
- 	placeObjectById("pila",pt[0],pt[1])
+ 	placeObjectById("pila",pt[0],pt[1],"pila")
  }
  function calculateMaxDistance(){
  	robP = asteroidPositions[0]
@@ -332,12 +336,52 @@ function isEmptyCell(pt, allow){
  	}
  	return batPMinMax;
  }
- function placeObjectById(id,x,y){
+ function placeObjectById(id,x,y,clss){
 	document.getElementById(id).style.left=x+"px"
 	document.getElementById(id).style.top=y+"px"
+	if(clss){
+		 	document.getElementById(id).classList.add(clss)
+	}
  }
  function removeShakeFromAllObjects(){
  	for (var i = 0; i < asteroidPositions.length; i++) {
  		document.getElementById(asteroidPositions[i][2]).classList.remove("shake")
  	}
+ }
+ function removeActive(){
+ 	document.getElementById("casa").classList.remove("active")
+ 	document.getElementById("scegli").classList.remove("active")
+ 	document.getElementById("conta").classList.remove("active")
+ }
+ function activate(id){
+ 	document.getElementById(id).classList.add("active")
+ }
+ function showButtons(){
+ 	document.getElementById('buttons').style.visibility = '';
+ 	document.getElementById('counters').style.visibility = 'hidden';
+ }
+ function showCounters(){
+ 	document.getElementById('counters').style.visibility = '';
+ 	 	document.getElementById('buttons').style.visibility = 'hidden';
+ }
+ function casa(){
+ 	removeActive()
+	activate("casa")
+ 	var elements = document.getElementsByClassName('asteroid');
+ 	while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+    asteroidPositions = []
+    showButtons()
+ }
+ function conta(){
+	removeActive()
+	activate("conta")
+	showCounters()
+ }
+ function scegli(){
+ 	removeActive()
+	activate("scegli")
+ 	distributeObjsRand();
+ 	showButtons()
  }
