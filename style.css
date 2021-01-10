@@ -11,9 +11,10 @@ h1{
 }
 
 .main-title {
-  font-size: 50px;
+  font-size: 48px;
   margin-left: 47px;
   transform:scale(2,1);
+  font-family: monospace;
 
 }
 .main-title span:nth-child(1) {
@@ -47,6 +48,10 @@ h1{
 }
 .conta{
 	background-color: azure;
+}
+#button-count{
+	margin-right: 188px;
+    margin-top: 50px;
 }
 line{
 	stroke:#6a1919;
@@ -89,6 +94,10 @@ line{
 }
 #counters{
 	visibility: hidden;
+	
+    width: 700px;
+    float: right;
+    margin-top: -300px;
 }
 .up {background-color: #2fad19}
 .right {background-color: #ffff00}
@@ -146,8 +155,9 @@ input[type="text"]{
 	float: left;
 }
 .select-box-svg{
-	width: 100px;
-	/*float: left;*/
+	width: 62px;
+	float: left;
+	margin-right: 20px;
 }
 .slide {
   /*animation: 2s 1 forwards;*/

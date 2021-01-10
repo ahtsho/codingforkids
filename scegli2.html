@@ -3,11 +3,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 		<script src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="iconselect/css/lib/control/iconselect.css" >
+		<script type="text/javascript" src="iconselect/lib/control/iconselect.js"></script>
+		<script type="text/javascript" src="iconselect/lib/iscroll.js"></script>
 		<script type="text/javascript">
 		 window.onload = function(){
-		 	//placeRobotRand()
-			//distributeObjsRand();
-			//casa();
+		 	var iconSelect;
 		 }
 		</script>
 	</head>
@@ -74,40 +75,34 @@
 					</g>
 				</svg>
 			</button>
-			<button id="button5" class="button" onclick="location.reload();">Nuovo Gioco</button>
+			<button id="button5" class="button button4" onclick="location.reload();">Nuovo Gioco</button>
 		 </div>
 		 <div id="counters" >
 	   		<div class="counter-block">
-		   		<input id="input1" class="number" type="text" maxlength="4" size="1"></input>
-			    <fieldset class="select-box-svg t-neutral">
-			    	<div id="my-icon-select1"></div>
-			    </fieldset>
-			</div>
-			<div class="counter-block">
-		   		<input id="input2" class="number" type="text" maxlength="4" size="1"></input>
-			    <fieldset class="select-box-svg t-neutral">
-			    	<div id="my-icon-select2"></div>
-			    </fieldset>
-			</div>
-			<div class="counter-block">
-		   		<input id="input3" class="number" type="text" maxlength="4" size="1"></input>
-			    <fieldset class="select-box-svg t-neutral">
-			    	<div id="my-icon-select3"></div>
-			    </fieldset>
-			</div>
-			<div class="counter-block">
-		   		<input id="input4" class="number" type="text" maxlength="4" size="1"></input>
-			    <fieldset class="select-box-svg t-neutral">
-			    	<div id="my-icon-select4"></div>
-			    </fieldset>
-			</div>
-			<div class="counter-block">
-		   		<input id="input5" class="number" type="text" maxlength="4" size="1"></input>
-			    <fieldset class="select-box-svg t-neutral">
-			    	<div id="my-icon-select5"></div>
-			    </fieldset>
-			</div>
-			<button class="button button4 left" onclick="loadActions()">VAI</button>
+				   		<input id="input1" class="number" type="text" maxlength="4" size="1"></input>
+					    <fieldset class="select-box-svg t-neutral">
+					    	<div id="my-icon-select1"></div>
+					    </fieldset>
+					</div>
+					<div class="counter-block">
+				   		<input id="input2" class="number" type="text" maxlength="4" size="1"></input>
+					    <fieldset class="select-box-svg t-neutral">
+					    	<div id="my-icon-select2"></div>
+					    </fieldset>
+					</div>
+					<div class="counter-block">
+				   		<input id="input3" class="number" type="text" maxlength="4" size="1"></input>
+					    <fieldset class="select-box-svg t-neutral">
+					    	<div id="my-icon-select3"></div>
+					    </fieldset>
+					</div>
+					<div class="counter-block">
+				   		<input id="input4" class="number" type="text" maxlength="4" size="1"></input>
+					    <fieldset class="select-box-svg t-neutral">
+					    	<div id="my-icon-select4"></div>
+					    </fieldset>
+					</div>
+			<button id="button-count" class="button button4 left" onclick="loadActions()">VAI</button>
 		</div>
 		<script>
 			document.addEventListener('onkeypress', () => {
@@ -123,25 +118,33 @@
 			});
 			//document.onkeydown = checkKey();
 			document.addEventListener("keydown", function(event) {
-			event.preventDefault();
+			
+			//event.preventDefault();
 			const key = event.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
-			switch (key) { // change to event.key to key to use the above variable
-				case "ArrowLeft":
-				  turnL()
-				 
-				  break;
-				case "ArrowRight":
-				 	turnR()
-				  
-				  break;
-				case "ArrowUp":
-				  move()
-				  
-				  break;
-				case "ArrowDown":
-				  // Down pressed
-				  break;
+			if(activePage!=="conta"){
+				switch (key) { // change to event.key to key to use the above variable
+					case "ArrowLeft":
+					  turnL()
+					 
+					  break;
+					case "ArrowRight":
+					 	turnR()
+					  
+					  break;
+					case "ArrowUp":
+					  move()
+					  
+					  break;
+					case "ArrowDown":
+					  // Down pressed
+					  break;
+					}
 				}
+		});
+		document.addEventListener('transitionend', () => {
+			if(activePage==="conta"){
+				playNext()
+			}
 		});
 		</script>
 	</body>

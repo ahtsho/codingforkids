@@ -1,6 +1,6 @@
  var actionStack = [];
  var asteroidPositions = []
- 
+ var activePage = ""
  function updateTranslate(x,y){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
@@ -40,13 +40,14 @@
  	document.body.classList.add("night")
  	document.getElementById("celebrate").classList.add("pyro")
  	document.getElementById("button5").style.visibility='visible'
+ 	charging()
  }
- function updateTranslate2(x,y){
+ function updateTranslate2(x,y,action){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
 		if(next[1]>0 && next[1]<500){
 			//"translate(152px, 117px) rotate(50deg)"
-			if(isEmptyCell(extractDirection(next),true)){
+			if(isEmptyCell(extractDirection(next),action)){
 				setTransformation('translate('+next[0]+'px,'+next[1]+'px) '+getCurrentRotate())
 				xyr = getCurrentXYval()
 				p[0] = xyr[0]
@@ -137,7 +138,7 @@
  function move(){
 	//currOrientation = getCurrentDval()
 	step = getNextStep()
-	updateTranslate2(step[0],step[1])
+	updateTranslate2(step[0],step[1],"move")
  }
  function getNextStep(){
  	step = []
@@ -218,7 +219,6 @@
  	}
  }
  function loadActions(){
- 	actionStack.push({'my-icon-select5':document.getElementById("input5").value})
  	actionStack.push({'my-icon-select4':document.getElementById("input4").value})
  	actionStack.push({'my-icon-select3':document.getElementById("input3").value})
  	actionStack.push({'my-icon-select2':document.getElementById("input2").value})
@@ -256,37 +256,37 @@ function getRandomInt(min,max) {
  	pt[0] = getRandomInt(min,max)
  	pt[1] = getRandomInt(min,max)
  	pt[2] = id
- 	inserted = insertIntoTakenPositions(pt)
+ 	inserted = insertIntoTakenPositions(pt, "place")
  	counter = 0;
  	while(!inserted && counter < 10){
  		counter = counter+1
  		pt[0] = getRandomInt(min,max)
  		pt[1] = getRandomInt(min,max)
- 		inserted = insertIntoTakenPositions(pt)
+ 		inserted = insertIntoTakenPositions(pt,"place")
  	}
  	if(counter >=10){
  		console.log("counter=="+counter);
  	}
  	return pt
  }
-function isEmptyCell(pt, allow){
+function isEmptyCell(pt,action){
 	for (var i = 0; i < asteroidPositions.length; i++) {
  		if(asteroidPositions[i][0]==pt[0] && asteroidPositions[i][1]==pt[1] ){
  			//the obstacles are for now only asteroids
  			//&& asteroidPositions[i][2].search("aster")==0){
- 			if((asteroidPositions[i][2].search("pila")==0 || 
- 				asteroidPositions[i][2].search("robot")==0) 
- 				&& allow){
+ 			
+ 			if(action==="move" && asteroidPositions[i][2]==="pila"){
  				return true;
  			} else {
  				return false;
  			}
+ 			return false;
  		}
  	}
  	return true;
 }
  function insertIntoTakenPositions(pt){
- 	isEmpty = isEmptyCell(pt,false)
+ 	isEmpty = isEmptyCell(pt)
  	if (isEmpty){
  		asteroidPositions.push(pt)
  	}
@@ -294,15 +294,20 @@ function isEmptyCell(pt, allow){
  }
  function placeRobotRand(){
  	xy = [[0,0,0,-90],[0,4,180,270],[4,0,0,90],[4,4,180,90]]
- 	i = getRandomInt(0,4)
- 	pick = xy[i]
- 	//val is like "translate(152px, 117px) rotate(50deg)"
- 	tran = updateTranslate2(pick[0],pick[1])
- 	if(tran){
-	 	r = getRandomInt(2,4)
-	 	updateRotate2(pick[r])
-	 	asteroidPositions[0]=[pick[0],pick[1],"robot"]
-	 }
+ 	var count = 0
+ 	while(count<10){
+	 	i = getRandomInt(0,4)
+	 	pick = xy[i]
+	 	//val is like "translate(152px, 117px) rotate(50deg)"
+	 	tran = updateTranslate2(pick[0],pick[1],"place")
+	 	if(tran){
+		 	r = getRandomInt(2,4)
+		 	updateRotate2(pick[r])
+		 	asteroidPositions[0]=[pick[0],pick[1],"robot"]
+		 	return;
+		 }
+		count = count +1;
+	}
  }
  function distributeObjsRand(){
  	placeRobotRand()
@@ -337,23 +342,28 @@ function isEmptyCell(pt, allow){
  	return batPMinMax;
  }
  function placeObjectById(id,x,y,clss){
-	document.getElementById(id).style.left=x+"px"
-	document.getElementById(id).style.top=y+"px"
-	if(clss){
-		 	document.getElementById(id).classList.add(clss)
+ 	var obj = document.getElementById(id)
+ 	if(obj){
+ 		obj.style.left=x+"px"
+		obj.style.top=y+"px"
+		if(clss){
+			obj.classList.add(clss)
+ 		}
 	}
  }
  function removeShakeFromAllObjects(){
  	for (var i = 0; i < asteroidPositions.length; i++) {
- 		document.getElementById(asteroidPositions[i][2]).classList.remove("shake")
+ 		var ast = document.getElementById(asteroidPositions[i][2])
+ 		if(ast){
+ 			ast.classList.remove("shake")
+ 		}
  	}
  }
- function removeActive(){
+ 
+ function activate(id){
  	document.getElementById("casa").classList.remove("active")
  	document.getElementById("scegli").classList.remove("active")
  	document.getElementById("conta").classList.remove("active")
- }
- function activate(id){
  	document.getElementById(id).classList.add("active")
  }
  function showButtons(){
@@ -361,27 +371,56 @@ function isEmptyCell(pt, allow){
  	document.getElementById('counters').style.visibility = 'hidden';
  }
  function showCounters(){
- 	document.getElementById('counters').style.visibility = '';
- 	 	document.getElementById('buttons').style.visibility = 'hidden';
+ 	document.getElementById('counters').style.visibility = "visible";
+ 	document.getElementById('buttons').style.visibility = 'hidden';
  }
- function casa(){
- 	removeActive()
+ function clean(){
+ 	document.getElementById("aster1").classList.remove("asteroid")
+ 	document.getElementById("aster2").classList.remove("asteroid")
+ 	document.getElementById("aster3").classList.remove("asteroid")
+ 	document.getElementById("aster4").classList.remove("asteroid")
+ 	asteroidPositions = []
+ }
+function casa(){
+	activePage = "casa"
+	clean()
 	activate("casa")
- 	var elements = document.getElementsByClassName('asteroid');
- 	while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-    asteroidPositions = []
-    showButtons()
- }
- function conta(){
-	removeActive()
+	showButtons()
+}
+function conta(){
+	activePage = "conta"
+	clean()	
 	activate("conta")
+	loadIconSelection()
 	showCounters()
- }
+	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
+ 	placeObjectById("pila",pt[0],pt[1],"pila")
+}
  function scegli(){
- 	removeActive()
+ 	activePage = "scegli"
+ 	clean()
 	activate("scegli")
  	distributeObjsRand();
  	showButtons()
+ }
+ function loadIconSelection(){
+ 	if( document.getElementById("my-icon-select1") &&
+ 		document.getElementById("my-icon-select2") &&
+ 		document.getElementById("my-icon-select3") &&
+ 		document.getElementById("my-icon-select4")){
+		iconSelect1 = new IconSelect("my-icon-select1");
+		iconSelect2 = new IconSelect("my-icon-select2");
+		iconSelect3 = new IconSelect("my-icon-select3");
+		iconSelect4 = new IconSelect("my-icon-select4");
+
+		var icons = [];
+		icons.push({'iconFilePath':'iconselect/images/icons/move.svg', 'iconValue':'1'});
+		icons.push({'iconFilePath':'iconselect/images/icons/left.svg', 'iconValue':'2'});
+		icons.push({'iconFilePath':'iconselect/images/icons/right.svg', 'iconValue':'3'});
+
+		iconSelect1.refresh(icons);
+		iconSelect2.refresh(icons);
+		iconSelect3.refresh(icons);
+		iconSelect4.refresh(icons);
+	}
  }
