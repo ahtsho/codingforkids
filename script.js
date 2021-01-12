@@ -1,6 +1,8 @@
  var actionStack = [];
  var asteroidPositions = []
  var activePage = ""
+ var pagesList = ["casa","scegli","conta","contagruppi"]
+ var singlePageElementsList = ["buttons","counters", "countergroup"]
  function updateTranslate(x,y){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
@@ -309,6 +311,10 @@ function isEmptyCell(pt,action){
 		count = count +1;
 	}
  }
+ function placeRandBattery(){
+ 	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
+ 	placeObjectById("pila",pt[0],pt[1],"pila")
+ }
  function distributeObjsRand(){
  	placeRobotRand()
  	for (var i = 1; i <=4; i++) {
@@ -361,66 +367,77 @@ function isEmptyCell(pt,action){
  }
  
  function activate(id){
- 	document.getElementById("casa").classList.remove("active")
- 	document.getElementById("scegli").classList.remove("active")
- 	document.getElementById("conta").classList.remove("active")
+ 	for(i in pagesList){
+ 		document.getElementById(pagesList[i]).classList.remove("active")
+ 	}
  	document.getElementById(id).classList.add("active")
+ 	activePage = id
+ }
+ function hide(id){
+ 	document.getElementById(id).style.visibility = 'hidden';
+ }
+ function unhide(id){
+ 	document.getElementById(id).style.visibility = 'visible';
+ }
+ function showOnly(id){
+ 	for(i in singlePageElementsList){
+ 		hide(singlePageElementsList[i])
+ 	}
+ 	unhide(id)
  }
  function showButtons(){
- 	document.getElementById('buttons').style.visibility = '';
- 	document.getElementById('counters').style.visibility = 'hidden';
+ 	showOnly("buttons")
  }
  function showCounters(){
- 	document.getElementById('counters').style.visibility = "visible";
- 	document.getElementById('buttons').style.visibility = 'hidden';
+ 	showOnly("counters")
  }
+ function showGroupCounters(){
+ 	showOnly("countergroup")
+ }
+ 
  function clean(){
- 	document.getElementById("aster1").classList.remove("asteroid")
- 	document.getElementById("aster2").classList.remove("asteroid")
- 	document.getElementById("aster3").classList.remove("asteroid")
- 	document.getElementById("aster4").classList.remove("asteroid")
+ 	for(var i = 1; i < 5; i++){
+ 		document.getElementById("aster"+i).classList.remove("asteroid")
+ 	}
  	asteroidPositions = []
  }
 function casa(){
-	activePage = "casa"
 	clean()
 	activate("casa")
 	showButtons()
 }
 function conta(){
-	activePage = "conta"
 	clean()	
 	activate("conta")
 	loadIconSelection()
 	showCounters()
-	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
- 	placeObjectById("pila",pt[0],pt[1],"pila")
+	placeRobotRand()
+	placeRandBattery()
+}
+function contagruppi(){
+	clean()	
+	activate("contagruppi")
+	loadIconSelection()
+	showGroupCounters()
 }
  function scegli(){
- 	activePage = "scegli"
  	clean()
 	activate("scegli")
  	distributeObjsRand();
  	showButtons()
  }
+ function loadIcon(id, ics){
+ 	if(document.getElementById(id)){
+		iconSelect = new IconSelect(id);
+		iconSelect.refresh(ics);
+	}
+ }
  function loadIconSelection(){
- 	if( document.getElementById("my-icon-select1") &&
- 		document.getElementById("my-icon-select2") &&
- 		document.getElementById("my-icon-select3") &&
- 		document.getElementById("my-icon-select4")){
-		iconSelect1 = new IconSelect("my-icon-select1");
-		iconSelect2 = new IconSelect("my-icon-select2");
-		iconSelect3 = new IconSelect("my-icon-select3");
-		iconSelect4 = new IconSelect("my-icon-select4");
-
-		var icons = [];
+ 	var icons = [];
 		icons.push({'iconFilePath':'iconselect/images/icons/move.svg', 'iconValue':'1'});
 		icons.push({'iconFilePath':'iconselect/images/icons/left.svg', 'iconValue':'2'});
 		icons.push({'iconFilePath':'iconselect/images/icons/right.svg', 'iconValue':'3'});
-
-		iconSelect1.refresh(icons);
-		iconSelect2.refresh(icons);
-		iconSelect3.refresh(icons);
-		iconSelect4.refresh(icons);
-	}
+		for(var i = 0; i < 13; i++){
+			loadIcon("my-icon-select"+i,icons);
+		}
  }

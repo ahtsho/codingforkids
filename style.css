@@ -49,6 +49,16 @@ h1{
 .conta{
 	background-color: azure;
 }
+#countergroup {
+	border: solid 1 red;
+	visibility: hidden;
+    width: 700px;
+    float: right;
+    margin-top: -300px;
+}
+.row{
+	display: flow-root;
+}
 #button-count{
 	margin-right: 188px;
     margin-top: 50px;
@@ -94,7 +104,6 @@ line{
 }
 #counters{
 	visibility: hidden;
-	
     width: 700px;
     float: right;
     margin-top: -300px;
