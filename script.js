@@ -205,34 +205,58 @@
  function getRequestedDirection(cmd){
  	return document.getElementById(cmd).getElementsByClassName("selected-icon")[0].innerHTML.split(".svg")[0]
  }
- function executeActionFromIcon(icon,iter){
- 	if(getRequestedDirection(icon).endsWith("left")){
+ function executeActionFromIcon(dir,iter){
+ 	if(dir.endsWith("left")){
  		for(i=0;i<iter;i++){
  			turnL()
  		}
- 	} else if(getRequestedDirection(icon).endsWith("right")){
+ 	} else if(dir.endsWith("right")){
  		for(i=0;i<iter;i++){
  			turnR()
  		}
- 	} else {
+ 	} else if(dir.endsWith("move")){
  		for(i=0;i<iter;i++){
  			move()
  		}
  	}
  }
- function loadActions(){
- 	actionStack.push({'my-icon-select4':document.getElementById("input4").value})
- 	actionStack.push({'my-icon-select3':document.getElementById("input3").value})
- 	actionStack.push({'my-icon-select2':document.getElementById("input2").value})
- 	actionStack.push({'my-icon-select1':document.getElementById("input1").value})
 
+ function loadActions(){
+ 	actionStack = []
+ 	for(var i = 4; i > 0; i--){
+ 		var action = {}
+ 		action.name = 'my-icon-select'+i
+ 		action.value = document.getElementById('input'+i).value
+ 		actionStack.push(action);
+ 	}
  	playNext();
  }
+ function loadGroupActions(){
+	actionStack = []
+	for (var row = 5; row > 0; row --){
+		rowIter = Number(document.getElementById('row-input'+row).value)
+		for(var iter=0; iter < rowIter; iter ++){
+			for(var col = row*5+5-1; col >= row*5; col--){
+		 		var action = {}
+		 		n = getRequestedDirection('my-icon-select'+col).split("/")
+		 		if(n[n.length-1]=="0"){
+		 			//do nothing
+		 		} else {
+			 		action.name = n[n.length-1]
+			 		action.value = 1
+			 		actionStack.push(action);
+			 	}
+		 	}
+		 }
+	}
+	playNext();
+ }
  function playNext(){
- 	actIter = actionStack.pop()
- 	for(x in actIter){
- 		executeActionFromIcon(x,actIter[x])
+ 	action = actionStack.pop()
+ 	if(action){
+ 		executeActionFromIcon(action.name,action.value)
  	}
+
  }
 function getRandomInt(min,max) {
 	//return Math.floor(Math.random() * Math.floor(max));
@@ -434,10 +458,12 @@ function contagruppi(){
  }
  function loadIconSelection(){
  	var icons = [];
+ 		icons.push({'iconFilePath':'iconselect/images/icons/0.svg', 'iconValue':'0'});
 		icons.push({'iconFilePath':'iconselect/images/icons/move.svg', 'iconValue':'1'});
 		icons.push({'iconFilePath':'iconselect/images/icons/left.svg', 'iconValue':'2'});
 		icons.push({'iconFilePath':'iconselect/images/icons/right.svg', 'iconValue':'3'});
-		for(var i = 0; i < 13; i++){
+		for(var i = 0; i < 30; i++){
 			loadIcon("my-icon-select"+i,icons);
 		}
  }
+ 

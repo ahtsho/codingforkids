@@ -21,6 +21,11 @@
 		 <a id="contagruppi" onClick="contagruppi()">Conta gruppi</a>
 		</div>
 		</h1>
+		<div id="dashboard">
+			<button id="button-restart-robot" class="button button4 button6" onclick="placeRobotRand()">Robot</button>
+			<button id="button-restart-countgroup" class="button button4 button6 button7" onclick="loadIconSelection()">Pulisci comandi</button>
+			<button id="button-restart-asteroid" class="button button4 button6 button7" onclick="loadIconSelection()">Asteroidi</button>
+		</div>
 		<div id="board">
 			<div id="celebrate" class="">
     		<div class="before"></div>
@@ -107,30 +112,7 @@
 		</div>
 		<div id="countergroup">
 			<div class="row">
-				<input id="input1" class="number" type="text" maxlength="4" size="1"></input>
-		   		<div class="counter-block">
-				    <fieldset class="select-box-svg t-neutral">
-				    	<div id="my-icon-select9"></div>
-				    </fieldset>
-				</div>
-				<div class="counter-block">
-				    <fieldset class="select-box-svg t-neutral">
-				    	<div id="my-icon-select10"></div>
-				    </fieldset>
-				</div>
-				<div class="counter-block">
-				    <fieldset class="select-box-svg t-neutral">
-				    	<div id="my-icon-select11"></div>
-				    </fieldset>
-				</div>
-				<div class="counter-block">
-				    <fieldset class="select-box-svg t-neutral">
-				    	<div id="my-icon-select12"></div>
-				    </fieldset>
-				</div>
-			</div>
-			<div class="row">
-				<input id="input1" class="number" type="text" maxlength="4" size="1"></input>
+				<input id="row-input1" class="number" type="text" maxlength="4" size="1"></input>
 		   		<div class="counter-block">
 				    <fieldset class="select-box-svg t-neutral">
 				    	<div id="my-icon-select5"></div>
@@ -151,8 +133,125 @@
 				    	<div id="my-icon-select8"></div>
 				    </fieldset>
 				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select9"></div>
+				    </fieldset>
+				</div>
 			</div>
-			<button id="button-count" class="button button4 left" onclick="loadActions()">VAI</button>
+			<div class="row">
+				<input id="row-input2" class="number" type="text" maxlength="4" size="1"></input>
+		   		<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select10"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select11"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select12"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select13"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select14"></div>
+				    </fieldset>
+				</div>
+			</div>
+			<div class="row">
+				<input id="row-input3" class="number" type="text" maxlength="4" size="1"></input>
+		   		<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select15"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select16"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select17"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select18"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select19"></div>
+				    </fieldset>
+				</div>
+			</div>
+			<div class="row">
+				<input id="row-input4" class="number" type="text" maxlength="4" size="1"></input>
+		   		<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select20"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select21"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select22"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select23"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select24"></div>
+				    </fieldset>
+				</div>
+			</div>
+			<div class="row">
+				<input id="row-input5" class="number" type="text" maxlength="4" size="1"></input>
+		   		<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select25"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select26"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select27"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select28"></div>
+				    </fieldset>
+				</div>
+				<div class="counter-block">
+				    <fieldset class="select-box-svg t-neutral">
+				    	<div id="my-icon-select29"></div>
+				    </fieldset>
+				</div>
+			</div>
+			<button id="button-count" class="button button4 left" onclick="loadGroupActions()">VAI</button>
 		</div>
 		<script>
 			document.addEventListener('onkeypress', () => {
@@ -192,7 +291,7 @@
 				}
 		});
 		document.addEventListener('transitionend', () => {
-			if(activePage==="conta"){
+			if(activePage==="conta"||activePage==="contagruppi"){
 				playNext()
 			}
 		});

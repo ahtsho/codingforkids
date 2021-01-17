@@ -7,7 +7,7 @@
 
 h1{
 	background-color: #384ee55c;
-	margin-bottom: 70px;
+	margin-bottom: 11px;
 }
 
 .main-title {
@@ -73,6 +73,10 @@ line{
 	stroke-width:15;
 	stroke:#a71313;
 }
+#dashboard{
+    width: fit-content;
+    margin-left:45px;
+}
 #buttons{
 	padding-right: 140px;
 }
@@ -96,11 +100,23 @@ line{
 	float: right;
 	width: 395px;
 }
+.button6{
+	float: none;
+	width: 220px;
+	background-color: #003380;
+}
+.button7{
+	float: right;
+}
 #button5 {
 	background-color:#47c9f0;
 	font-size: 24px;
 	width: 395px;
 	visibility: hidden;
+}
+#countergroup-buttons {
+	margin-bottom: 10px;
+    margin-top: -90px;
 }
 #counters{
 	visibility: hidden;
