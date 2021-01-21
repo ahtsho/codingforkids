@@ -319,10 +319,22 @@ function isEmptyCell(pt,action){
  	return isEmpty;
  }
  function placeRobotRand(){
- 	xy = [[0,0,0,-90],[0,4,180,270],[4,0,0,90],[4,4,180,90]]
+ 	asteroidPositions = []
+ 	xy = [[0,0,0,-90,"robot"],[0,4,180,270,"robot"],[4,0,0,90,"robot"],[4,4,180,90,"robot"]]
+ 	var count = 0
+ 	while(count<10){
+ 		var i = getRandomInt(0,4)
+ 		if(insertIntoTakenPositions(xy[i])){
+ 			setTransformation('translate('+(xy[i][0]*100+52)+'px,'+(xy[i][1]*100+17)+'px) rotate('+xy[i][i%2+2]+'deg)')
+ 			return
+ 		}
+ 		count = count +1;
+ 	}
+ 	/*
  	var count = 0
  	while(count<10){
 	 	i = getRandomInt(0,4)
+	 	xy = [[0,0,0,-90],[0,4,180,270],[4,0,0,90],[4,4,180,90]]
 	 	pick = xy[i]
 	 	//val is like "translate(152px, 117px) rotate(50deg)"
 	 	tran = updateTranslate2(pick[0],pick[1],"place")
@@ -333,7 +345,7 @@ function isEmptyCell(pt,action){
 		 	return;
 		 }
 		count = count +1;
-	}
+	}*/
  }
  function placeRandBattery(){
  	pt = getUniqueTransformedPoints(2,5,93,150,"pila")
@@ -466,4 +478,4 @@ function contagruppi(){
 			loadIcon("my-icon-select"+i,icons);
 		}
  }
- 
+
