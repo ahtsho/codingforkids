@@ -3,31 +3,8 @@
  var activePage = ""
  var pagesList = ["casa","scegli","conta","contagruppi"]
  var singlePageElementsList = ["buttons","counters", "countergroup"]
- function updateTranslate(x,y){
-	next = getNextPos(x,y)
-	if(next[0]>0 && next[0]<500){
-		if(next[1]>0 && next[1]<500){
-			setAttribute('translate('+next[0]+','+next[1]+') '+getCurrentRotate())
-		} else {
-			addVBounce()
-		}
-	} else {
-		addHBounce()
-	}
-	removeAllBouncesFromBoard()
- }
- function extractDirection(pt){
- 	p = []
- 	p[0] = pt[0] - 52
- 	p[1] = pt[1] - 17
- 	if(p[0]>0){
- 		p[0] = p[0]/100
- 	}
- 	if(p[1]>0){
- 		p[1] = p[1]/100
- 	}
- 	return p
- }
+
+
  function hasWon(pt){
  	for (var i = 0; i < asteroidPositions.length; i++) {
  		if(asteroidPositions[i][0]==pt[0] && asteroidPositions[i][1]==pt[1] ){
@@ -44,7 +21,22 @@
  	document.getElementById("button5").style.visibility='visible'
  	charging()
  }
- function updateTranslate2(x,y,action){
+
+
+  function extractDirection(pt){
+ 	p = []
+ 	p[0] = pt[0] - 52
+ 	p[1] = pt[1] - 17
+ 	if(p[0]>0){
+ 		p[0] = p[0]/100
+ 	}
+ 	if(p[1]>0){
+ 		p[1] = p[1]/100
+ 	}
+ 	return p
+ }
+
+ function updateTranslate(x,y,action){
 	next = getNextPos(x,y)
 	if(next[0]>0 && next[0]<500){
 		if(next[1]>0 && next[1]<500){
@@ -140,7 +132,7 @@
  function move(){
 	//currOrientation = getCurrentDval()
 	step = getNextStep()
-	updateTranslate2(step[0],step[1],"move")
+	updateTranslate(step[0],step[1],"move")
  }
  function getNextStep(){
  	step = []
@@ -337,7 +329,8 @@ function isEmptyCell(pt,action){
 	 	xy = [[0,0,0,-90],[0,4,180,270],[4,0,0,90],[4,4,180,90]]
 	 	pick = xy[i]
 	 	//val is like "translate(152px, 117px) rotate(50deg)"
-	 	tran = updateTranslate2(pick[0],pick[1],"place")
+	 	tran = updateTranslate
+	(pick[0],pick[1],"place")
 	 	if(tran){
 		 	r = getRandomInt(2,4)
 		 	updateRotate2(pick[r])
