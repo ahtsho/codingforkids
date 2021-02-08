@@ -1,6 +1,6 @@
 class Robot extends BoardObject {
-	constructor(x,y,d){
-		super(x,y)
+	constructor(x,y,id,d){
+		super(x,y,'robot');
 		this.d = d;
 	}
 
@@ -38,6 +38,10 @@ class Robot extends BoardObject {
 
 	draw(){
 		let xy = super.scale(52,17,100);
+				var obj = document.getElementById(this.cssID);
+		if(!obj) {
+			this.createDomEl();
+		}
 		document.getElementById("robot").style.transform= "translate("+xy[0]+"px, "+xy[1]+"px) rotate("+this.d+"deg)";
 		document.getElementById("robot").classList.add("slide")
 	}

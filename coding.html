@@ -2,27 +2,85 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
+		<script src="js/board.js"></script>
+		<script src="js/boardobject.js"></script>
+		<script src="js/robot.js"></script>
+		<script src="js/battery.js"></script>
+		<script src="js/asteroid.js"></script>
+		<script src="js/game.js"></script>
+		<script src="js/practicemove.js"></script>
+		<script src="js/avoidasteroids.js"></script>
 		<script src="script.js"></script>
-		<script src="boardobject.js"></script>
-		<script src="robot.js"></script>
-		<script src="battery.js"></script>
-		<script src="asteroid.js"></script>
-		<script src="game.js"></script>
-		<script src="practicemove.js"></script>
 		<link rel="stylesheet" type="text/css" href="iconselect/css/lib/control/iconselect.css" >
 		<script type="text/javascript" src="iconselect/lib/control/iconselect.js"></script>
 		<script type="text/javascript" src="iconselect/lib/iscroll.js"></script>
 		<script type="text/javascript">
 		 window.onload = function(){
 		 	var iconSelect;
+		 	var game = new PracticeMove();
+
+/*----------BUTTON EVENT LISTENERS-------------------------*/
+
+		 	var buttonMove = document.getElementById("button-move");
+		 	buttonMove.addEventListener('click', function() {
+		 		game.move();
+			});
+
+		 	var buttonMove = document.getElementById("button-turn-left");
+		 	buttonMove.addEventListener('click', function() {
+		 		game.robot.turnLeft();
+		 		game.robot.draw();
+			});
+
+		 	var buttonMove = document.getElementById("button-turn-right");
+		 	buttonMove.addEventListener('click', function() {
+		 		game.robot.turnRight();
+		 		game.robot.draw();
+			});
+
+		 	document.addEventListener("keydown", function(event) {
+			const key = event.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
+			if(activePage!=="conta"){
+				switch (key) { // change to event.key to key to use the above variable
+					case "ArrowLeft":
+						game.robot.turnLeft();
+						game.robot.draw();
+					  break;
+					case "ArrowRight":
+						game.robot.turnRight()
+						game.robot.draw();
+					  break;
+					case "ArrowUp":
+						game.move();
+					  break;
+					case "ArrowDown":
+					  // Down pressed
+					  break;
+					}
+				}
+			});
+/*----------PAGE EVENT LISTENERS-------------------------*/
+			var home = document.getElementById("casa");
+		 		home.addEventListener('click', function() {
+		 		game = new PracticeMove();
+				activate("casa")
+				showButtons()
+			});
+
+			var home = document.getElementById("scegli");
+			 	home.addEventListener('click', function() {
+				game = new AvoidAsteroids();
+				activate("scegli")
+				showButtons()
+			});
 		 }
 		</script>
 	</head>
 	<body>
 		<h1><span class="main-title"><span>C</span><span>O</span><span>D</span><span>I</span><span>N</span><span>G</span></span>
 		<div class="topnav">
-		 <a id="casa" class="active" onClick="casa()">Prova</a>
-		 <a id="scegli" onClick="scegli()">Scegli</a>
+		 <a id="casa" class="active">Prova</a>
+		 <a id="scegli" onClick="asteroidGame()">Scegli</a>
 		 <a id="conta" onClick="conta()">Conta</a>
 		 <a id="contagruppi" onClick="contagruppi()">Conta gruppi</a>
 		</div>
@@ -37,12 +95,7 @@
     		<div class="before"></div>
     		<div class="after"></div>
 		</div>
-		<div id="pila" class=""></div>
-		<div id="aster1" class=""></div>
-		<div id="aster2" class=""></div>
-		<div id="aster3" class=""></div>
-		<div id="aster4" class=""></div>
-		<div id="robot" class="robot-back" style="transform: translate(52px, 17px) rotate(0deg);"></div>
+		<div id="boardobjs"></div>
 		<svg id="maze" class="coding" width="500" height="500" xmlns="http://www.w3.org/2000/svg">
 			<g>
 				<g id="vertical">
@@ -66,21 +119,21 @@
 			</g>
 		 </svg>
 		 <div id="buttons">
-			<button class="button button4 up" onclick="move()">
+			<button id="button-move"class="button button4 up" >
 				<svg width="37" height="58" xmlns="http://www.w3.org/2000/svg">
 					<g>
 					 <path id="svg_2" d="m0.75,29.18159l17.5,-28.43159l17.5,28.43159l-8.75,0l0,28.5684l-17.5,0l0,-28.5684l-8.75,0z" stroke-width="1.5" fill="#ffffff" stroke="#156507"/>
 					</g>
 				</svg>
 			</button>
-			<button class="button button4 right" onclick="turnL()">
+			<button id="button-turn-left" class="button button4 yellow">
 				<svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
 					<g>
 					 <path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#cab83c"/>
 					</g>
 				</svg>
 			</button>
-			<button class="button button4 left" onclick="turnR()">
+			<button id="button-turn-right" class="button button4 red">
 				<svg width="44" height="58" xmlns="http://www.w3.org/2000/svg">
 					<g transform="translate(45,0) scale(-1,1)">
 					 <path fill="#ffffff" stroke-width="1.5" stroke-opacity="null" d="m18.83956,11.71204l0,-10.96204l-18.08956,19.64168l18.08956,19.64185l-0.20204,-6.8045c-1.15261,-12.71093 15.41693,-12.97488 13.3965,1.85747c-2.02042,14.83235 -8.66823,16.49803 -8.66823,16.49803l0,5.9898c0,0 20.21742,1.29912 20.21742,-27.60397c0,-22.70744 -13.67868,-18.01602 -24.74365,-18.25832z" id="svg_9" stroke="#5f1d09"/>
@@ -269,33 +322,10 @@
 			});
 			board.addEventListener('animationend', () => {
 			   	removeAllBouncesFromBoard();
-			   	removeShakeFromAllObjects();
+			   	removeShakeFromAllAsteroids();
 			});
 			//document.onkeydown = checkKey();
-			document.addEventListener("keydown", function(event) {
 			
-			//event.preventDefault();
-			const key = event.key; // "ArrowRight", "ArrowLeft", "ArrowUp", or "ArrowDown"
-			if(activePage!=="conta"){
-				switch (key) { // change to event.key to key to use the above variable
-					case "ArrowLeft":
-					  turnL()
-					 
-					  break;
-					case "ArrowRight":
-					 	turnR()
-					  
-					  break;
-					case "ArrowUp":
-					  move()
-					  
-					  break;
-					case "ArrowDown":
-					  // Down pressed
-					  break;
-					}
-				}
-		});
 		document.addEventListener('transitionend', () => {
 			if(activePage==="conta"||activePage==="contagruppi"){
 				playNext()

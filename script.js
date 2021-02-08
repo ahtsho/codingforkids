@@ -130,9 +130,9 @@
 	return Number(getCurrentRotate().replace(/\(|\)|rotate|deg/g, ""))
  }
  function move(){
-	//currOrientation = getCurrentDval()
-	step = getNextStep()
-	updateTranslate(step[0],step[1],"move")
+ 	this.game.robot.move()
+/*	step = getNextStep()
+	updateTranslate(step[0],step[1],"move")*/
  }
  function getNextStep(){
  	step = []
@@ -386,12 +386,10 @@ function isEmptyCell(pt,action){
  		}
 	}
  }
- function removeShakeFromAllObjects(){
- 	for (var i = 0; i < asteroidPositions.length; i++) {
- 		var ast = document.getElementById(asteroidPositions[i][2])
- 		if(ast){
- 			ast.classList.remove("shake")
- 		}
+ function removeShakeFromAllAsteroids(){
+ 	var asteroids = document.getElementsByClassName("asteroid");
+ 	for (var i = 0; i < asteroids.length; i++) {
+ 		asteroids[i].classList.remove("shake")
  	}
  }
  
@@ -471,4 +469,17 @@ function contagruppi(){
 			loadIcon("my-icon-select"+i,icons);
 		}
  }
-
+//-------------------------------
+function practiceGame(){
+	let game = new PracticeMove();
+	activate("casa")
+	showButtons()
+}
+function asteroidGame(){
+	let game = new AvoidAsteroids();
+	activate("scegli")
+	showButtons()
+}
+function getRandNum(max,min){
+	return Math.floor(Math.random() * (max - min) + min);
+}

@@ -125,8 +125,8 @@ line{
     margin-top: -300px;
 }
 .up {background-color: #2fad19}
-.right {background-color: #ffff00}
-.left {background-color: #f14411}
+.yellow {background-color: #ffff00}
+.red {background-color: #f14411}
 
 /* Style the links inside the navigation bar */
 .topnav {
@@ -259,7 +259,7 @@ input[type="text"]{
 .zooom {
 	animation: zoominoutsinglefeatured 10s forwards;
 }
-.robot-back{
+.robot{
 	background-image: url('imgs/robot.svg');
 	width: 96px;
 	height: 62px;
