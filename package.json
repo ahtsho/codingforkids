@@ -1,0 +1,23 @@
+{
+  "name": "codingforkids",
+  "version": "1.0.0",
+  "description": "modern version of the 2021 vanilla js game",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahtsho/codingforkids.git"
+  },
+  "author": "ahtsho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahtsho/codingforkids/issues"
+  },
+  "homepage": "https://github.com/ahtsho/codingforkids#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  }
+}
