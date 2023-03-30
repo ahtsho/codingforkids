@@ -4,8 +4,6 @@ var World = /** @class */ (function () {
         canvas.height = w;
         canvas.width = h;
         var context = canvas.getContext("2d");
-        //context.lineCap = "round";
-        //context.lineJoin = "round";
         context.strokeStyle = "black";
         context.lineWidth = 0.5;
         this.canvas = canvas;
@@ -30,3 +28,4 @@ var World = /** @class */ (function () {
     return World;
 }());
 new World(500, 500);
+//# sourceMappingURL=game.js.map
