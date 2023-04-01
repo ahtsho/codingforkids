@@ -1,0 +1,34 @@
+<svg width="96" height="62" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="64" width="98" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#000000" id="svg_1" height="40.49999" width="48.37722" y="10.7372" x="23.81003" stroke-width="1.5" fill="#007fff"/>
+  <rect stroke="#000000" id="svg_8" height="6.85357" width="9.24981" y="51.69241" x="43.15524" stroke-opacity="null" stroke-width="1.5" fill="#56aaff"/>
+  <line stroke="#000000" stroke-linecap="null" stroke-linejoin="null" id="svg_9" y2="7.05872" x2="19.7616" y1="24.54347" x1="37.79694" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ffffff"/>
+  <line stroke="#000000" stroke-linecap="null" stroke-linejoin="null" id="svg_10" y2="7.00605" x2="76.01229" y1="24.56564" x1="58.83863" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ffffff"/>
+  <ellipse stroke="#000000" ry="3.26432" rx="3.27057" id="svg_13" cy="4.17559" cx="77.95808" stroke-opacity="null" stroke-width="1.5" fill="#ffff00"/>
+  <path stroke="#000000" id="svg_20" d="m47.68224,57.9028c1.24572,-2.55227 6.1265,0 0,3.28149c-6.1265,-3.28149 -1.24572,-5.83376 0,-3.28149z" stroke-opacity="null" stroke-width="1.5" fill="#ff7f00"/>
+  <g stroke="null" id="svg_14">
+   <ellipse stroke="#000000" ry="3.23437" rx="7.76769" id="svg_4" cy="51.6529" cx="32.5667" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ffffff"/>
+   <ellipse stroke="#000000" ry="2.01211" rx="2.06391" id="svg_6" cy="53.0401" cx="32.3228" stroke-opacity="null" stroke-width="1.5" fill="#7f3f00"/>
+  </g>
+  <rect stroke="#000000" id="svg_3" height="16.84141" width="3.38927" y="22.50322" x="71.22608" stroke-width="1.5" fill="#005fbf"/>
+  <rect stroke="#000000" id="svg_18" height="44.31616" width="10.16691" y="8.49318" x="84.66149" stroke-opacity="null" stroke-width="1.5" fill="#ffff00"/>
+  <rect stroke="#000000" id="svg_19" height="7.06443" width="9.0452" y="27.19193" x="74.69617" stroke-opacity="null" stroke-width="1.5" fill="#007fff"/>
+  <g stroke="null" id="svg_32">
+   <ellipse stroke="#000000" ry="3.23437" rx="7.76769" id="svg_30" cy="50.98624" cx="62.78604" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#ffffff"/>
+   <ellipse stroke="#000000" ry="2.01211" rx="2.06391" id="svg_31" cy="52.37343" cx="62.54214" stroke-opacity="null" stroke-width="1.5" fill="#7f3f00"/>
+  </g>
+  <ellipse stroke="#000000" ry="3.26432" rx="3.27057" id="svg_34" cy="4.00453" cx="17.93609" stroke-opacity="null" stroke-width="1.5" fill="#ff0000"/>
+  <g stroke="null" id="svg_39">
+   <rect stroke="#000000" id="svg_35" height="16.84141" width="3.38927" y="21.28392" x="22.49796" stroke-width="1.5" fill="#005fbf"/>
+   <rect stroke="#000000" id="svg_36" height="44.31616" width="10.82042" y="9.02827" x="1.04739" stroke-opacity="null" stroke-width="1.5" fill="#ff0000"/>
+   <rect stroke="#000000" id="svg_37" height="7.06443" width="9.0452" y="26.67438" x="12.63471" stroke-opacity="null" stroke-width="1.5" fill="#007fff"/>
+  </g>
+  <rect stroke="#000000" fill="#56ffff" stroke-width="1.5" stroke-opacity="null" x="38.35345" y="24.5703" width="20.16663" height="14.99997" id="svg_41"/>
+ </g>
+</svg>

@@ -1,11 +1,13 @@
-class World {
+import { Board } from "./model/board";
+
+class HTMLViewer {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D;
 
-  constructor(w: number, h: number) {
+  constructor(board: Board) {
     let canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    canvas.height = w;
-    canvas.width = h;
+    canvas.height = board.getHeight();
+    canvas.width = board.getWidth();
 
     let context = canvas.getContext("2d");
     context.strokeStyle = "black";
@@ -34,4 +36,20 @@ class World {
   }
 }
 
-new World(500, 500);
+// class Board {
+//   private _width: number;
+//   private _height: number;
+
+//   constructor(w: number, h: number) {
+//     this._width = w;
+//     this._height = h;
+//   }
+//   public getWidth() {
+//     return this._width;
+//   }
+//   public getHeight() {
+//     return this._height;
+//   }
+// }
+
+new HTMLViewer(new Board(500, 500));
