@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "modern version of the 2021 vanilla js game",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "",
     "build": "tsc"
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/ahtsho/codingforkids#readme",
   "devDependencies": {
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1"
   }
 }

@@ -2,13 +2,13 @@
     "compilerOptions": {
         "outDir": "dist",
         "rootDir": "src",
-        "target": "es5",
+        "target": "ES6",
         "sourceMap": true,
         "lib": [
-            "es5",
+            "ES6",
             "dom"
         ],
         "noUnusedLocals": true,
-        "module": "commonjs"
+        // "module": "commonjs"
     }
 }

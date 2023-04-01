@@ -1,18 +1,19 @@
-var World = /** @class */ (function () {
-    function World(w, h) {
-        var canvas = document.getElementById("canvas");
-        canvas.height = w;
-        canvas.width = h;
-        var context = canvas.getContext("2d");
+import { Board } from "./model/board";
+class HTMLViewer {
+    constructor(board) {
+        let canvas = document.getElementById("canvas");
+        canvas.height = board.getHeight();
+        canvas.width = board.getWidth();
+        let context = canvas.getContext("2d");
         context.strokeStyle = "black";
         context.lineWidth = 0.5;
         this.canvas = canvas;
         this.context = context;
         this.draw();
     }
-    World.prototype.draw = function () {
-        var context = this.context;
-        for (var x = 0; x < this.canvas.width;) {
+    draw() {
+        let context = this.context;
+        for (let x = 0; x < this.canvas.width;) {
             context.beginPath();
             context.moveTo(x, 0);
             context.lineTo(x, this.canvas.height);
@@ -24,8 +25,21 @@ var World = /** @class */ (function () {
             x = x + this.canvas.height / 10;
         }
         context.closePath();
-    };
-    return World;
-}());
-new World(500, 500);
+    }
+}
+// class Board {
+//   private _width: number;
+//   private _height: number;
+//   constructor(w: number, h: number) {
+//     this._width = w;
+//     this._height = h;
+//   }
+//   public getWidth() {
+//     return this._width;
+//   }
+//   public getHeight() {
+//     return this._height;
+//   }
+// }
+new HTMLViewer(new Board(500, 500));
 //# sourceMappingURL=game.js.map
