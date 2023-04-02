@@ -1,55 +1,150 @@
-import { Board } from "./model/board";
-
+// import { Board } from "./model/board";
 class HTMLViewer {
   private canvas: HTMLCanvasElement;
   private context: CanvasRenderingContext2D;
+  private robot: Robot;
 
-  constructor(board: Board) {
-    let canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    canvas.height = board.getHeight();
-    canvas.width = board.getWidth();
+  private board: Board;
 
-    let context = canvas.getContext("2d");
-    context.strokeStyle = "black";
-    context.lineWidth = 0.5;
+  constructor(board: Board, rob: Robot) {
+    document.addEventListener("keydown", this.arrowKeyEventHandler);
 
-    this.canvas = canvas;
-    this.context = context;
+    this.canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    this.canvas.height = board.getHeight();
+    this.canvas.width = board.getWidth();
+
+    this.context = this.canvas.getContext("2d");
+    this.context.strokeStyle = "black";
+    this.context.lineWidth = 0.5;
+
+    this.robot = rob;
+    this.board = board;
     this.draw();
   }
 
-  private draw() {
-    let context = this.context;
-    for (let x = 0; x < this.canvas.width; ) {
-      context.beginPath();
-      context.moveTo(x, 0);
-      context.lineTo(x, this.canvas.height);
-      context.stroke();
+  private arrowKeyEventHandler = (e: KeyboardEvent) => {
+    let key = (e as KeyboardEvent).key;
+    this.robot.move(
+      key as Direction,
+      this.board.getCellDim(),
+      this.board.getWidth(),
+      this.board.getHeight()
+    );
+    //this.robot.draw(this.context, this.board.getCellDim());
+    this.draw();
+  };
 
-      context.beginPath();
-      context.moveTo(0, x);
-      context.lineTo(this.canvas.width, x);
-      context.stroke();
-      x = x + this.canvas.height / 10;
+  private drawHorizontalLine(x: number) {
+    this.context.moveTo(x, 0);
+    this.context.lineTo(x, this.canvas.height);
+    this.context.stroke();
+  }
+
+  private drawVerticalLine(y: number) {
+    this.context.moveTo(0, y);
+    this.context.lineTo(this.canvas.height, y);
+    this.context.stroke();
+  }
+
+  private draw() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.context.beginPath();
+    for (let i = 0; i < this.canvas.width; ) {
+      this.drawHorizontalLine(i);
+      this.drawVerticalLine(i);
+      i = i + this.board.getCellDim();
     }
-    context.closePath();
+    this.context.closePath();
+    this.robot.draw(this.context, this.board.getCellDim());
   }
 }
 
-// class Board {
-//   private _width: number;
-//   private _height: number;
+class Board {
+  private width: number;
+  private height: number;
+  private cellDim: number;
 
-//   constructor(w: number, h: number) {
-//     this._width = w;
-//     this._height = h;
-//   }
-//   public getWidth() {
-//     return this._width;
-//   }
-//   public getHeight() {
-//     return this._height;
-//   }
-// }
+  constructor(w: number, h: number, rows: number) {
+    this.width = w;
+    this.height = h;
+    this.cellDim = this.width / rows;
+  }
+  public getWidth() {
+    return this.width;
+  }
+  public getHeight() {
+    return this.height;
+  }
+  public getCellDim() {
+    return this.cellDim;
+  }
+}
 
-new HTMLViewer(new Board(500, 500));
+type Direction = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight";
+
+class Robot {
+  private position: { x: number; y: number };
+  // TODO: type Degree:IntRange<0,360>
+  private orierntation: number;
+  constructor(x: number, y: number) {
+    this.position = { x, y };
+  }
+  public move(
+    direction: Direction,
+    step: number,
+    boardWidth: number,
+    boardHeight: number
+  ) {
+    console.log(JSON.stringify(this.position));
+    console.log(direction);
+
+    switch (direction) {
+      case "ArrowDown":
+        if (this.position.y < boardHeight - step) {
+          this.position.y += step;
+        } else {
+          alert("OUCH!");
+        }
+        return;
+      case "ArrowUp":
+        if (this.position.y > 0) {
+          this.position.y -= step;
+        } else {
+          alert("OUCH!");
+        }
+        return;
+      case "ArrowLeft":
+        if (this.position.x > 0) {
+          this.position.x -= step;
+        } else {
+          alert("OUCH!");
+        }
+        return;
+      case "ArrowRight":
+        if (this.position.x < boardHeight - step) {
+          this.position.x += step;
+        } else {
+          alert("OUCH!");
+        }
+        return;
+    }
+  }
+
+  public turn(angle: number): void {
+    this.orierntation = this.orierntation + angle;
+  }
+  public draw(context: CanvasRenderingContext2D, h: number) {
+    const height = h / 3;
+    var path = new Path2D(
+      `M ${height} ${height} L ${3 * height} ${height} L ${2 * height} ${
+        3 * height
+      } z`
+    );
+
+    context.setTransform(1, 0, 0, 1, this.position.x, this.position.y);
+    context.fill(path);
+    context.stroke(path);
+  }
+}
+
+const viewer = new HTMLViewer(new Board(1000, 1000, 5), new Robot(0, 0));
