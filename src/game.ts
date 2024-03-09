@@ -27,10 +27,10 @@ class HTMLViewer {
     this.robot.move(
       key as Direction,
       this.board.getCellDim(),
-      this.board.getWidth(),
-      this.board.getHeight()
+      this.board.getWidth()
     );
-    //this.robot.draw(this.context, this.board.getCellDim());
+    this.robot.turn(key as Rotate);
+
     this.draw();
   };
 
@@ -81,6 +81,7 @@ class Board {
 }
 
 type Direction = "ArrowUp" | "ArrowDown" | "ArrowLeft" | "ArrowRight";
+type Rotate = "l" | "r";
 
 class Robot {
   private position: { x: number; y: number };
@@ -88,16 +89,13 @@ class Robot {
   private orierntation: number;
   constructor(x: number, y: number) {
     this.position = { x, y };
+    this.orierntation = 0;
   }
   public move(
-    direction: Direction,
+    direction: Direction | Rotate,
     step: number,
-    boardWidth: number,
     boardHeight: number
   ) {
-    console.log(JSON.stringify(this.position));
-    console.log(direction);
-
     switch (direction) {
       case "ArrowDown":
         if (this.position.y < boardHeight - step) {
@@ -129,9 +127,12 @@ class Robot {
         return;
     }
   }
-
-  public turn(angle: number): void {
-    this.orierntation = this.orierntation + angle;
+  public getOrierntation() {
+    return this.orierntation;
+  }
+  public turn(wise: Rotate): void {
+    if (wise === "l") this.orierntation -= 90;
+    else if (wise === "r") this.orierntation += 90;
   }
   public draw(context: CanvasRenderingContext2D, h: number) {
     const height = h / 3;

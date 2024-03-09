@@ -4,8 +4,9 @@ var HTMLViewer = /** @class */ (function () {
         var _this = this;
         this.arrowKeyEventHandler = function (e) {
             var key = e.key;
-            _this.robot.move(key, _this.board.getCellDim(), _this.board.getWidth(), _this.board.getHeight());
-            //this.robot.draw(this.context, this.board.getCellDim());
+            _this.robot.move(key, _this.board.getCellDim(), _this.board.getWidth());
+            _this.robot.turn(key);
+            _this.context.rotate(_this.robot.getOrierntation());
             _this.draw();
         };
         document.addEventListener("keydown", this.arrowKeyEventHandler);
@@ -62,10 +63,9 @@ var Board = /** @class */ (function () {
 var Robot = /** @class */ (function () {
     function Robot(x, y) {
         this.position = { x: x, y: y };
+        this.orierntation = 0;
     }
-    Robot.prototype.move = function (direction, step, boardWidth, boardHeight) {
-        console.log(JSON.stringify(this.position));
-        console.log(direction);
+    Robot.prototype.move = function (direction, step, boardHeight) {
         switch (direction) {
             case "ArrowDown":
                 if (this.position.y < boardHeight - step) {
@@ -101,8 +101,14 @@ var Robot = /** @class */ (function () {
                 return;
         }
     };
-    Robot.prototype.turn = function (angle) {
-        this.orierntation = this.orierntation + angle;
+    Robot.prototype.getOrierntation = function () {
+        return this.orierntation;
+    };
+    Robot.prototype.turn = function (wise) {
+        if (wise === "l")
+            this.orierntation -= 90;
+        else if (wise === "r")
+            this.orierntation += 90;
     };
     Robot.prototype.draw = function (context, h) {
         var height = h / 3;
